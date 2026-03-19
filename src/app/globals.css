@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0F0F23;
+  --foreground: #ffffff;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
+}
+
+.deal-badge {
+  @apply bg-green-500 text-white text-xs font-bold px-2 py-1 rounded;
+}
+
+.price-old {
+  @apply text-gray-500 line-through text-sm;
+}
+
+.price-new {
+  @apply text-green-400 font-bold text-lg;
+}
+
+.platform-badge {
+  @apply text-xs px-2 py-1 rounded-full bg-gray-800 text-gray-300;
+}
