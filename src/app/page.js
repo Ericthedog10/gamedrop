@@ -5,12 +5,17 @@ import GameCard from '@/components/GameCard';
 import SearchBar from '@/components/SearchBar';
 import PlatformFilter from '@/components/PlatformFilter';
 import FeaturedDeals from '@/components/FeaturedDeals';
+import Wishlist from '@/components/Wishlist';
+import PriceAlerts from '@/components/PriceAlerts';
+import Pricing from '@/components/Pricing';
 
 export default function Home() {
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('all');
+  const [showWishlist, setShowWishlist] = useState(false);
+  const [showAlerts, setShowAlerts] = useState(false);
 
   useEffect(() => {
     fetchDeals();
@@ -78,9 +83,33 @@ export default function Home() {
 
       {/* Deals Grid */}
       <section id="deals">
-        <h2 className="text-2xl font-bold mb-6">
-          {searchQuery ? `Results for "${searchQuery}"` : 'Hot Deals'}
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold">
+            {searchQuery ? `Results for "${searchQuery}"` : 'Hot Deals'}
+          </h2>
+          <div className="flex gap-4">
+            <button
+              onClick={() => setShowWishlist(!showWishlist)}
+              className={`px-4 py-2 rounded-lg transition ${
+                showWishlist 
+                  ? 'bg-gaming-purple text-white' 
+                  : 'bg-gaming-card text-gray-400 hover:text-white'
+              }`}
+            >
+              ❤️ Wishlist
+            </button>
+            <button
+              onClick={() => setShowAlerts(!showAlerts)}
+              className={`px-4 py-2 rounded-lg transition ${
+                showAlerts 
+                  ? 'bg-gaming-purple text-white' 
+                  : 'bg-gaming-card text-gray-400 hover:text-white'
+              }`}
+            >
+              🔔 Alerts
+            </button>
+          </div>
+        </div>
         
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -100,6 +129,15 @@ export default function Home() {
           </div>
         )}
       </section>
+
+      {/* Wishlist Section */}
+      {showWishlist && <Wishlist />}
+
+      {/* Alerts Section */}
+      {showAlerts && <PriceAlerts />}
+
+      {/* Pricing Section */}
+      <Pricing />
 
       {/* CTA Section */}
       <section className="mt-20 bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-2xl p-12 text-center">
